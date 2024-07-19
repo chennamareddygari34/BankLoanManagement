@@ -1,83 +1,47 @@
 ﻿using BankLoanManagement.Interfaces;
 using BankLoanManagement.Models;
-using BankLoanManagement.Repositories;
+using BankLoanManagement.Models.DTOs;
 using BankLoanManagement.Utilities;
-using Microsoft.Data.SqlClient.Server;
+using System.Collections.Generic;
 using System.Net;
 
 namespace BankLoanManagement.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly IRepository<int,Customer> _customerRepository;
-        public CustomerService(IRepository<int, Customer> customerRepository) 
+        private readonly ICustomerRepository<int, Customer> _customerRepository;
 
-        { 
-          _customerRepository=customerRepository;
-
-        }
-        public Customer AddNewCustomer(Customer customer)
+        public CustomerService(ICustomerRepository<int, Customer> customerRepository)
         {
-            if (customer != null)
-            {
-                return _customerRepository.Add(customer);
-            }
-            else
-            {
-                throw new InvalidUserEntry();
-            }
+            _customerRepository = customerRepository;
         }
 
-        public Customer DeleteCustomer(int id)
+        public List<CustomerDTO> GetAllCustomers()
         {
-            if (id != null)
-            {
-                return _customerRepository.Delete(id);
-            }
-            else
-            {
-                throw new InvalidUserEntry();
-            }
+            return _customerRepository.GetAllCustomer();
+        }
+    
+
+    public Customer DeleteCustomerById(int customerId)
+        {
+            return _customerRepository.DeleteCustomerById(customerId);
         }
 
-        public List<Customer> GetAllCustomers()
+
+
+        public CustomerDTO GetCustomerById(int customerId)
         {
-            return _customerRepository.GetAll();
+            return _customerRepository.GetCustomerById(customerId);
         }
 
-        public Customer GetCustomerById(int customerid)
+        public CustomerDTO UpdateCustomer(CustomerDTO customerdto)
         {
-           if(customerid != null)
-            {
-                return _customerRepository.Get(customerid);
-            }
-            else
-            {
-                throw new InvalidUserEntry();
-            }
+            return _customerRepository.UpdateCustomer(customerdto);
         }
 
-        public Customer UpdateCustomer(Customer customer)
+        public CustomerDTO AddCustomer(CustomerDTO customerDTO)
         {
-            var mycustomer = _customerRepository.Get(customer.CustomerId);
-            if (mycustomer != null)
-            {
-                mycustomer.MaritalStatus = customer.MaritalStatus;
-                mycustomer.OccupationType = customer.OccupationType;
-                mycustomer.PhoneNumber = customer.PhoneNumber;
-                mycustomer.City = customer.City;
-                mycustomer.State = customer.State;
-                mycustomer.District = customer.District;
-                mycustomer.HouseNo = customer.HouseNo;
-                mycustomer.Landmark = customer.Landmark;
-                mycustomer.Pincode = customer.Pincode;
-                return _customerRepository.Update(mycustomer);
-            }
-            else
-            {
-                throw new InvalidAddressException();
-            }
-
+            return _customerRepository.AddCustomer(customerDTO);
         }
     }
 }

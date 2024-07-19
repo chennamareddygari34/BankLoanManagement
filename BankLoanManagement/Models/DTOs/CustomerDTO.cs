@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BankLoanManagement.Models
+﻿namespace BankLoanManagement.Models.DTOs
 {
-    public partial class Customer
-    {
-        public Customer()
-        {
-            Loans = new HashSet<Loan>();
-        }
-
+  public class CustomerDTO
+  {
         public int CustomerId { get; set; }
         public long? AccountNumber { get; set; }
         public string? FirstName { get; set; }
@@ -23,7 +15,6 @@ namespace BankLoanManagement.Models
         public string? OccupationType { get; set; }
         public int? AddressId { get; set; }
 
-        public virtual CustomerAddress? Address { get; set; }
-        public virtual ICollection<Loan> Loans { get; set; }
+        public  CustomerAddress? Address { get; set; }
     }
 }

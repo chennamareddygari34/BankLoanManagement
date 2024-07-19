@@ -1,13 +1,14 @@
 ﻿using BankLoanManagement.Models;
+using BankLoanManagement.Models.DTOs;
 
 namespace BankLoanManagement.Interfaces
 {
     public interface ICustomerService
     {
-        List<Customer> GetAllCustomers();
-        public Customer GetCustomerById(int CustomerId);
-        public Customer AddNewCustomer(Customer customer);
-        public Customer UpdateCustomer(Customer customer);
-        public Customer DeleteCustomer(int id);
+        public List<CustomerDTO> GetAllCustomers();
+        public CustomerDTO GetCustomerById(int customerId);
+        CustomerDTO AddCustomer(CustomerDTO customerDTO);
+        public CustomerDTO UpdateCustomer(CustomerDTO customerdto);
+        public Customer DeleteCustomerById(int CustomerId);
     }
 }

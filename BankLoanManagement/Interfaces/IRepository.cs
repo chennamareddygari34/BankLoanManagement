@@ -1,6 +1,8 @@
-﻿namespace BankLoanManagement.Interfaces
+﻿using BankLoanManagement.Models;
+
+namespace BankLoanManagement.Interfaces
 {
-    public interface IRepository<K,T> where T : class
+    public interface IRepository<K, T> where T : class
     {
 
         public List<T> GetAll();
@@ -8,6 +10,5 @@
         public T Add(T item);
         public T Delete(K key);
         public T Update(T item);
-
     }
 }
